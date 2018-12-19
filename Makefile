@@ -13,7 +13,7 @@ LDFLAGS =
 
 INCLUDE =	include/
 
-CFLAGS  =   -lc_graph_prog -W -Wall -Werror -Wextra
+CFLAGS  =   	-lc_graph_prog -W -Wall -Werror -Wextra
 
 NAME	= 	mr_driller
 

@@ -35,7 +35,7 @@ sfRenderWindow *create_window(char *name, int width, int height)
 	return (window);
 }
 
-sfSprite *my_sprite(const char* filename)
+sfSprite *my_sprite(const char *filename)
 {
 	sfTexture *texture;
 	sfSprite *sprite;
@@ -43,6 +43,19 @@ sfSprite *my_sprite(const char* filename)
 	sprite = sfSprite_create();
 	texture = sfTexture_createFromFile(filename, NULL);
 	sfSprite_setTexture(sprite, texture, sfTrue);
+	return (sprite);
+}
+
+sfSprite *my_sprite_rec(const char *filename, sfIntRect area)
+{
+	(void)area;
+	sfTexture *texture;
+	sfSprite *sprite;
+
+	sprite = sfSprite_create();
+	texture = sfTexture_createFromFile(filename, NULL);
+	sfSprite_setTexture(sprite, texture, sfTrue);
+	sfSprite_setTextureRect(sprite, area);
 	return (sprite);
 }
 

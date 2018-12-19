@@ -12,20 +12,46 @@
 int gameloop (sfRenderWindow *window, sfEvent event) 
 {
     int **board = my_createboard();
+    sfSprite ***blocks = initialize_game(board);
 
     printf("first %d\n", board[0][0]);
     
     while (sfRenderWindow_isOpen(window)) {
-
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtClosed) {
                 sfRenderWindow_close(window);
             }
 	    }
         sfRenderWindow_clear(window, sfBlack);
+        sfRenderWindow_drawSprite(window, blocks[0][0], NULL);
+        sfRenderWindow_drawSprite(window, blocks[0][2], NULL);
         sfRenderWindow_display(window);
     }
     return (0);
+}
+
+sfSprite ***initialize_game (int **board)
+{
+    int row = 0;
+    int col = 0;
+    sfIntRect area;
+    area.left = 0;
+    area.top = 0;
+    area.width = 15;
+    area.height = 15;
+    sfSprite ***blocks = malloc(sizeof(sfSprite **) * 50);
+
+    while (row != 10) {
+        blocks[row] = malloc(sizeof(sfSprite *) * 30);
+        while (col != 30) {
+            if (board[row][col] != -1)
+                blocks[row][col] = my_sprite_rec("img/block.png", area);
+            col = col + 1;
+        }
+        col = 0;
+        row = row + 1;
+    }
+    return (blocks);
 }
 
 int **my_createboard()

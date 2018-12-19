@@ -26,3 +26,7 @@ int start_menu (sfRenderWindow *, sfEvent);
 int logo_display (sfRenderWindow *, sfEvent);
 
 int **my_createboard();
+
+sfSprite ***initialize_game (int **board);
+
+sfSprite *my_sprite_rec(const char *filename, sfIntRect area);
