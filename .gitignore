@@ -12,6 +12,8 @@ node_modules/
 *.o
 *.so
 *.pdf
+*.psd
+*.xcf
 a.out
 
 # Packages #

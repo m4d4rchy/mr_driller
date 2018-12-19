@@ -13,9 +13,15 @@ int gameloop (sfRenderWindow *window, sfEvent event)
 {
     int **board = my_createboard();
     sfSprite ***blocks = initialize_game(board);
+    sfSprite *gamegui = my_sprite("img/gamegui.png");
+    sfSprite *gameback = my_sprite("img/gameback.jpg");
+    sfVector2f position;
+    position.x = 350;
+    position.y = 0;
+    int count = 0;
 
     printf("first %d\n", board[0][0]);
-    
+    sfSprite_setPosition(gamegui, position);
     while (sfRenderWindow_isOpen(window)) {
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtClosed) {
@@ -23,29 +29,62 @@ int gameloop (sfRenderWindow *window, sfEvent event)
             }
 	    }
         sfRenderWindow_clear(window, sfBlack);
-        sfRenderWindow_drawSprite(window, blocks[0][0], NULL);
-        sfRenderWindow_drawSprite(window, blocks[0][2], NULL);
+        sfRenderWindow_drawSprite(window, gameback, NULL);
+        sfRenderWindow_drawSprite(window, gamegui, NULL);
+        while (count != 7) {
+            sfRenderWindow_drawSprite(window, blocks[0][count], NULL);
+            count = count + 1;
+        }
+        count = 0;
         sfRenderWindow_display(window);
     }
     return (0);
 }
 
-sfSprite ***initialize_game (int **board)
+sfSprite ***initialize_game (int **board) 
 {
+    (void)board;
     int row = 0;
     int col = 0;
     sfIntRect area;
     area.left = 0;
     area.top = 0;
-    area.width = 15;
-    area.height = 15;
-    sfSprite ***blocks = malloc(sizeof(sfSprite **) * 50);
+    area.width = 50;
+    area.height = 50;
+    sfSprite ***blocks = malloc(sizeof(**blocks) * 7);
+    sfVector2f position;
+    position.x = 0;
+    position.y = 200;
 
-    while (row != 10) {
-        blocks[row] = malloc(sizeof(sfSprite *) * 30);
-        while (col != 30) {
-            if (board[row][col] != -1)
+    while (row != 1) {
+        blocks[row] = malloc(sizeof(*blocks) * 7);
+        while (col != 7) {
+            if (board[row][col] == 0)
                 blocks[row][col] = my_sprite_rec("img/block.png", area);
+            else if (board[row][col] == 1) {
+                area.top = 50;
+                blocks[row][col] = my_sprite_rec("img/block.png", area);
+            }
+            else if (board[row][col] == 2) {
+                area.top = 100;
+                blocks[row][col] = my_sprite_rec("img/block.png", area);
+            }
+            else if (board[row][col] == 3) {
+                area.top = 150;
+                blocks[row][col] = my_sprite_rec("img/block.png", area);
+            }
+            else
+                blocks[row][col] = my_sprite_rec("img/block.png", area);
+            /*else if (board[row][col] == 4) {
+                area.top = 200;
+                blocks[row][col] = my_sprite_rec("img/block.png", area);
+            }
+            else if (board[row][col] == 5) {
+                area.top = 250;
+                blocks[row][col] = my_sprite_rec("img/block.png", area);
+            }*/                                    
+            sfSprite_setPosition(blocks[row][col], position);
+            position.x = position.x + 50;
             col = col + 1;
         }
         col = 0;
