@@ -25,6 +25,7 @@ int start_menu (sfRenderWindow *window, sfEvent event)
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtKeyPressed) {
                 sfMusic_stop(element.music);
+                sfMusic_play(element.sfx);
                 sfMusic_destroy(element.music);
                 sfSprite_destroy(element.background);
                 sfSprite_destroy(element.logo);

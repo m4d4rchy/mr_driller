@@ -29,6 +29,7 @@ typedef struct s_startmenu
     sfClock *message_clock;
     sfTime message_time;
     sfMusic* music;
+    sfMusic* sfx;
 
 } t_startmenu;
 

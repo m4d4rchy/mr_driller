@@ -40,6 +40,7 @@ struct s_startmenu start_menu_init(void)
     element.message_position.y = 500;
     element.message_clock = sfClock_create();
     element.music = sfMusic_createFromFile("sound/menu.ogg");
+    element.sfx = sfMusic_createFromFile("sound/start.ogg");
     sfText_setPosition(element.message, element.message_position);
     sfSprite_setPosition(element.logo, element.logo_position);
     sfText_setFont(element.message, element.font);
