@@ -48,7 +48,6 @@ sfSprite *my_sprite(const char *filename)
 
 sfSprite *my_sprite_rec(const char *filename, sfIntRect area)
 {
-	(void)area;
 	sfTexture *texture;
 	sfSprite *sprite;
 

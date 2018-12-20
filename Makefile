@@ -13,12 +13,14 @@ LDFLAGS =
 
 INCLUDE =	include/
 
-CFLAGS  =   	-lc_graph_prog -W -Wall -Werror -Wextra
+CFLAGS  =   -lcsfml-audio -lcsfml-window -lcsfml-graphics -lcsfml-system -W -Wall -Werror -Wextra
 
 NAME	= 	mr_driller
 
 SRC 	=	src/main.c\
-			src/game.c
+			src/game.c\
+			src/initialization.c\
+			src/main_menu.c
 
 all:		$(NAME)
 

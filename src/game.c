@@ -93,7 +93,7 @@ sfSprite ***initialize_game (int **board)
     return (blocks);
 }
 
-int **my_createboard()
+int **my_createboard(void)
 {
     int **board = malloc(sizeof (int *) * 501);
     int row = 0;
@@ -121,76 +121,25 @@ int **my_createboard()
     return (board);
 }
 
-int start_menu (sfRenderWindow *window, sfEvent event)
-{
-    sfSprite *background = my_sprite("img/menubg.jpg");
-    sfFont *font = sfFont_createFromFile("font/retro.ttf");
-    sfText *message = sfText_create();
-    sfClock *clock = sfClock_create();
-    sfTime fade;
-    float seconds;
-    sfVector2f position;
-    position.x = 115;
-    position.y = 500;
-    int show = 0;
-
-    sfText_setPosition(message, position);
-    sfText_setFont(message, font);
-    sfText_setString(message, "PRESS ANY KEY TO START");
-    while (sfRenderWindow_isOpen(window)) {
-        fade =  sfClock_getElapsedTime(clock);
-        seconds =  fade.microseconds / 250000.0;
-        sfRenderWindow_clear(window, sfBlack);
-        sfRenderWindow_drawSprite(window, background, NULL);
-        if (seconds > 1.5) {
-            if (show == 0)
-                show = 1;
-            else 
-                show = 0;
-            sfClock_restart(clock);
-        }
-        if (show == 1)
-            sfRenderWindow_drawText(window, message, NULL);
-        
-        sfRenderWindow_display(window);
-        while (sfRenderWindow_pollEvent(window, &event)) {
-            if (event.type == sfEvtKeyPressed) {
-                sfSprite_destroy(background);
-                sfText_destroy(message);
-                gameloop(window, event);
-            }
-            if (event.type == sfEvtClosed)
-                sfRenderWindow_close(window);
-	    }
-    }
-    return (0);
-}
-
 int logo_display (sfRenderWindow *window, sfEvent event) 
 {
-    sfClock *clock = sfClock_create();
-    sfTime fade;
-    sfColor color;
+    t_logo element = logo_display_init();
     float seconds;
-    color.r = 255;
-    color.g = 255;
-    color.b = 255;
-    color.a = 0;
-    sfSprite *logo = my_sprite("img/Namco-Logo.jpg");
+
     while (sfRenderWindow_isOpen(window)) {
-        fade =  sfClock_getElapsedTime(clock);
-        seconds =  fade.microseconds / 250000.0;
+        element.fade =  sfClock_getElapsedTime(element.clock);
+        seconds = element.fade.microseconds / 250000.0;
         sfRenderWindow_clear(window, sfBlack);
-        if (seconds > 0.15 && color.a < 255) {
-            color.a = color.a + 5;
-            sfClock_restart(clock);
+        if (seconds > 0.15 && element.color.a < 255) {
+            element.color.a = element.color.a + 5;
+            sfClock_restart(element.clock);
         }
-        sfSprite_setColor(logo, color); 	
-        sfRenderWindow_drawSprite(window, logo, NULL);
+        sfSprite_setColor(element.logo, element.color); 	
+        sfRenderWindow_drawSprite(window, element.logo, NULL);
         sfRenderWindow_display(window);
-        if (color.a == 255) {
-            sfClock_destroy(clock); 	
-            sfSprite_destroy(logo);
+        if (element.color.a == 255) {
+            sfClock_destroy(element.clock); 	
+            sfSprite_destroy(element.logo);
             start_menu(window, event);
         }
     }

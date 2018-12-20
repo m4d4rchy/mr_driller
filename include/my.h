@@ -14,19 +14,30 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "struct.h"
 
-sfRenderWindow *create_window(char *, int, int);
+#ifndef MY_H_
+#define MY_H_
 
+sfRenderWindow *create_window (char *, int, int);
+
+/*  game.c  */
 int gameloop (sfRenderWindow *, sfEvent);
-
-sfSprite *my_sprite(const char*);
-
-int start_menu (sfRenderWindow *, sfEvent);
-
+int **my_createboard (void);
 int logo_display (sfRenderWindow *, sfEvent);
+sfSprite ***initialize_game (int **);
 
-int **my_createboard();
+/*  main.c  */
+sfSprite *my_sprite (const char *);
+sfSprite *my_sprite_rec (const char *, sfIntRect);
 
-sfSprite ***initialize_game (int **board);
+/*  main_menu.c  */
+int start_menu (sfRenderWindow *, sfEvent);
+int blink_effect (sfRenderWindow *, t_startmenu *);
+int logo_animation (sfRenderWindow *, t_startmenu *);
+int circle_animation (sfRenderWindow *, t_startmenu *);
 
-sfSprite *my_sprite_rec(const char *filename, sfIntRect area);
+/*  initialization.c  */
+struct s_startmenu start_menu_init (void);
+struct s_logo logo_display_init (void);
+#endif
