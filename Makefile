@@ -13,7 +13,7 @@ LDFLAGS =
 
 INCLUDE =	include/
 
-CFLAGS  =   -lcsfml-audio -lcsfml-window -lcsfml-graphics -lcsfml-system -W -Wall -Werror -Wextra
+CFLAGS  =   	-lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio -W -Wall -Werror -Wextra
 
 NAME	= 	mr_driller
 

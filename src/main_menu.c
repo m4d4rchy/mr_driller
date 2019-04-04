@@ -32,8 +32,12 @@ int start_menu (sfRenderWindow *window, sfEvent event)
                 sfSprite_destroy(element.image);
                 sfText_destroy(element.message);
                 gameloop(window, event);
+                sfMusic_destroy(element.sfx);
             }
             if (event.type == sfEvtClosed) {
+                sfMusic_stop(element.music);
+                sfMusic_destroy(element.music);
+                sfMusic_destroy(element.sfx);
                 sfSprite_destroy(element.background);
                 sfSprite_destroy(element.logo);
                 sfSprite_destroy(element.image);
@@ -71,21 +75,28 @@ int circle_animation (sfRenderWindow *window, t_startmenu *element)
 
     element->circle_time =  sfClock_getElapsedTime(element->circle_clock);
     seconds =  element->circle_time.microseconds / 250000.0;
-    element->circle_area.top = 0;
-    element->circle_area.left = 0;
-    element->circle_area.width = 50;
-    element->circle_area.height = 50;
-    sfSprite_setTextureRect(element->circle[0], element->circle_area);
-    element->circle_area.top = 50;
-    sfSprite_setTextureRect(element->circle[1], element->circle_area);
-    element->circle_area.top = 100;
-    sfSprite_setTextureRect(element->circle[2], element->circle_area);
 
     if (seconds > 0.05) {
+        if (element->circle_area1.top == 200) {
+            element->circle_area1.top = 0;
+            element->circle_area2.top = 50;
+            element->circle_area3.top = 100;
+            sfSprite_setTextureRect(element->circle[0], element->circle_area1);
+            sfSprite_setTextureRect(element->circle[1], element->circle_area2);
+            sfSprite_setTextureRect(element->circle[2], element->circle_area3);
+
+        }
         if (element->circle_position[0].x == -50) {
             element->circle_position[0].x = 650;
             element->circle_position[1].x = -50;
             element->circle_position[2].x = 650;
+            element->circle_area1.top = element->circle_area1.top + 50;
+            element->circle_area2.top = element->circle_area2.top + 50;
+            element->circle_area3.top = element->circle_area3.top + 50;
+            sfSprite_setTextureRect(element->circle[0], element->circle_area1);
+            sfSprite_setTextureRect(element->circle[1], element->circle_area2);
+            sfSprite_setTextureRect(element->circle[2], element->circle_area3);
+
         }
         element->circle_position[0].x = element->circle_position[0].x - 2;
         element->circle_position[1].x = element->circle_position[1].x + 2;

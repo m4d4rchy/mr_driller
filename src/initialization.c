@@ -24,6 +24,17 @@ struct s_startmenu start_menu_init(void)
     element.circle[0] = my_sprite("img/circle_spritesheet.png");
     element.circle[1] = my_sprite("img/circle_spritesheet.png");
     element.circle[2] = my_sprite("img/circle_spritesheet.png");
+    element.circle_area1.width = 50;
+    element.circle_area1.height = 50;
+    element.circle_area2.width = 50;
+    element.circle_area2.height = 50;
+    element.circle_area3.width = 50;
+    element.circle_area3.height = 50;
+    sfSprite_setTextureRect(element.circle[0], element.circle_area1);
+    element.circle_area2.top = 50;
+    sfSprite_setTextureRect(element.circle[1], element.circle_area2);
+    element.circle_area3.top = 100;
+    sfSprite_setTextureRect(element.circle[2], element.circle_area3);
     element.circle_position[0].x = 650;
     element.circle_position[0].y = 180;
     sfSprite_setPosition(element.circle[0], element.circle_position[0]);
@@ -45,6 +56,19 @@ struct s_startmenu start_menu_init(void)
     sfSprite_setPosition(element.logo, element.logo_position);
     sfText_setFont(element.message, element.font);
     sfText_setString(element.message, "PRESS ANY KEY TO START");
+    return (element);
+}
+
+struct s_game gameloop_init(void)
+{
+    t_game element;
+
+    element.background = my_sprite("img/gameback.jpg");
+    element.gamegui = my_sprite("img/gamegui.png");
+    element.gamegui_position.x = 350;
+    element.gamegui_position.y = 0;
+    element.music = sfMusic_createFromFile("sound/level.ogg");
+    sfSprite_setPosition(element.gamegui, element.gamegui_position);
     return (element);
 }
 

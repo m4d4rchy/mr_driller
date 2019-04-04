@@ -20,7 +20,9 @@ typedef struct s_startmenu
     sfSprite *image;
     sfSprite **circle;
     sfVector2f *circle_position;
-    sfIntRect circle_area;
+    sfIntRect circle_area1;
+    sfIntRect circle_area2;
+    sfIntRect circle_area3;
     sfClock *circle_clock;
     sfTime circle_time;
     sfFont *font;
@@ -28,10 +30,19 @@ typedef struct s_startmenu
     sfVector2f message_position;
     sfClock *message_clock;
     sfTime message_time;
-    sfMusic* music;
-    sfMusic* sfx;
+    sfMusic *music;
+    sfMusic *sfx;
 
 } t_startmenu;
+
+typedef struct s_game
+{
+    sfSprite *background;
+    sfSprite *gamegui;
+    sfVector2f gamegui_position;
+    sfSprite ***blocks;
+    sfMusic *music;
+} t_game;
 
 typedef struct s_logo
 {

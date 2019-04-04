@@ -39,5 +39,6 @@ int circle_animation (sfRenderWindow *, t_startmenu *);
 
 /*  initialization.c  */
 struct s_startmenu start_menu_init (void);
+struct s_game gameloop_init(void);
 struct s_logo logo_display_init (void);
 #endif
