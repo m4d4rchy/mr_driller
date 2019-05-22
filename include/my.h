@@ -9,6 +9,7 @@
 
 #include <SFML/Audio.h>
 #include <SFML/Graphics.h>
+#include <SFML/Window.h>
 #include <SFML/Config.h>
 #include <time.h>
 #include <unistd.h>

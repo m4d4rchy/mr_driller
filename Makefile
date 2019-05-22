@@ -9,29 +9,30 @@
 
 CC	= 	gcc
 
-LDFLAGS =	
+LDFLAGS =	lib/
 
 INCLUDE =	include/
 
-CFLAGS  =   	-lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio -W -Wall -Werror -Wextra
+CFLAGS  =   	-Wl,-rpath=lib/ -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio -W -Wall -Werror -Wextra
 
 NAME	= 	mr_driller
 
 SRC 	=	src/main.c\
-			src/game.c\
-			src/initialization.c\
-			src/main_menu.c
+		src/game.c\
+		src/initialization.c\
+		src/main_menu.c
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			$(CC) -o $(NAME) $(SRC) -I$(INCLUDE) $(CFLAGS) $(LDFLAGS)
+		$(CC) -o $(NAME) $(SRC) -I$(INCLUDE) -L$(LDFLAGS) $(CFLAGS)
 
 clean:
-			rm -f $(OBJ)
+		rm -f $(OBJ)
 
 fclean: 	clean
-			$(RM) $(NAME)
+		$(RM) $(NAME)
+
 re: 		fclean all
 
 .PHONY: 	all clean fclean re

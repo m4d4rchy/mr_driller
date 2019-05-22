@@ -62,7 +62,13 @@ struct s_startmenu start_menu_init(void)
 struct s_game gameloop_init(void)
 {
     t_game element;
+    sfIntRect area;
+    area.left = 0;
+    area.top = 0;
+    area.width = 35;
+    area.height = 45;
 
+    element.player = my_sprite_rec("img/player.png", area);
     element.background = my_sprite("img/gameback.jpg");
     element.gamegui = my_sprite("img/gamegui.png");
     element.gamegui_position.x = 350;

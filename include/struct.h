@@ -41,7 +41,9 @@ typedef struct s_game
     sfSprite *gamegui;
     sfVector2f gamegui_position;
     sfSprite ***blocks;
+    sfSprite *player;
     sfMusic *music;
+    int depth;
 } t_game;
 
 typedef struct s_logo
