@@ -4,13 +4,13 @@
  * Created Date: Tuesday, December 18th 2018, 11:16:25 am
  * Author: yassine.b (yassine.b@caramail.com)
  * 
- * Copyright (c) 2018 - 2018 Yassine Benmessahel
+ * Copyright (c) 2018 - 2019 Yassine Benmessahel
  */
 
 #ifndef STRUCT_H_
 #define STRUCT_H_
 
-typedef struct s_startmenu
+typedef struct s_mainmenu
 {
     sfSprite *logo;
     sfVector2f logo_position;
@@ -42,8 +42,17 @@ typedef struct s_game
     sfVector2f gamegui_position;
     sfSprite ***blocks;
     sfSprite *player;
+    sfVector2f player_position;
     sfMusic *music;
+    sfClock *clock;
+    sfTime time;
+    sfText  **text;
     int depth;
+    int score;
+    int air;
+    int level;
+    float seconds;
+    int *player_block_pos;
 } t_game;
 
 typedef struct s_logo

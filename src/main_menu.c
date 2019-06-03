@@ -4,14 +4,14 @@
  * Created Date: Thursday, December 20th 2018, 3:53:38 pm
  * Author: yassine.b (yassine.b@caramail.com)
  * 
- * Copyright (c) 2018 - 2018 Yassine Benmessahel
+ * Copyright (c) 2018 - 2019 Yassine Benmessahel
  */
 
 #include "my.h"
 
-int start_menu (sfRenderWindow *window, sfEvent event)
+int main_menu (sfRenderWindow *window, sfEvent event)
 {
-    t_startmenu element = start_menu_init();
+    t_startmenu element = main_menu_init();
     sfMusic_play(element.music);
 
     while (sfRenderWindow_isOpen(window)) {
@@ -19,7 +19,7 @@ int start_menu (sfRenderWindow *window, sfEvent event)
         sfRenderWindow_drawSprite(window, element.background, NULL);
         circle_animation(window, &element);
         sfRenderWindow_drawSprite(window, element.image, NULL);
-        logo_animation(window, &element);
+        logo_drop(window, &element);
         blink_effect(window, &element);
         sfRenderWindow_display(window);
         while (sfRenderWindow_pollEvent(window, &event)) {
@@ -112,7 +112,7 @@ int circle_animation (sfRenderWindow *window, t_startmenu *element)
     return (0);
 }
 
-int logo_animation (sfRenderWindow *window, t_startmenu *element)
+int logo_drop (sfRenderWindow *window, t_startmenu *element)
 {
     static float seconds;
 

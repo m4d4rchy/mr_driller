@@ -4,12 +4,12 @@
  * Created Date: Thursday, December 20th 2018, 10:47:47 am
  * Author: yassine.b (yassine.b@caramail.com)
  * 
- * Copyright (c) 2018 - 2018 Yassine Benmessahel
+ * Copyright (c) 2018 - 2019 Yassine Benmessahel
  */
 
 #include "my.h"
 
-struct s_startmenu start_menu_init(void)
+struct s_mainmenu main_menu_init(void)
 {
     t_startmenu element;
 
@@ -63,18 +63,50 @@ struct s_game gameloop_init(void)
 {
     t_game element;
     sfIntRect area;
+    sfVector2f position;
+    position.x = 400;
+    position.y = 80;
     area.left = 0;
     area.top = 0;
     area.width = 35;
     area.height = 45;
 
+    element.depth = 0;
+    element.score = 0;
+    element.air = 100;
+    element.level = 0;
+    element.player_block_pos = malloc(sizeof(int) * 2);
+    element.player_block_pos[0] = 3;
+    element.player_block_pos[1] = 0;
+    element.text = malloc(sizeof(*element.text) * 4);
+    element.text[0] = create_texte("0", "font/ARCADE.otf", 50);
+    sfText_setPosition(element.text[0], position);
+    sfText_setColor(element.text[0], sfBlack);
+    element.text[1] = create_texte("0", "font/ARCADE.otf", 50);
+    position.y = 240;
+    sfText_setPosition(element.text[1], position);
+    sfText_setColor(element.text[1], sfBlack);
+    element.text[2] = create_texte("100%", "font/ARCADE.otf", 50);
+    position.x = 410;
+    position.y = 385;
+    sfText_setPosition(element.text[2], position);
+    sfText_setColor(element.text[2], sfBlack);
+    element.text[3] = create_texte("0", "font/ARCADE.otf", 50);
+    position.y = 525;
+    position.x = 450;
+    sfText_setPosition(element.text[3], position);
+    sfText_setColor(element.text[3], sfBlack);
     element.player = my_sprite_rec("img/player.png", area);
+    element.player_position.x = 157;
+    element.player_position.y = 157;
+    sfSprite_setPosition(element.player, element.player_position);
     element.background = my_sprite("img/gameback.jpg");
     element.gamegui = my_sprite("img/gamegui.png");
     element.gamegui_position.x = 350;
     element.gamegui_position.y = 0;
     element.music = sfMusic_createFromFile("sound/level.ogg");
     sfSprite_setPosition(element.gamegui, element.gamegui_position);
+    element.clock = sfClock_create();
     return (element);
 }
 

@@ -18,9 +18,10 @@ CFLAGS  =   	-Wl,-rpath=lib/ -lcsfml-graphics -lcsfml-window -lcsfml-system -lcs
 NAME	= 	mr_driller
 
 SRC 	=	src/main.c\
-		src/game.c\
-		src/initialization.c\
-		src/main_menu.c
+			src/game.c\
+			src/main_menu.c\
+			src/splashscreen.c\
+			src/initialization.c
 
 all:		$(NAME)
 

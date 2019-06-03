@@ -4,43 +4,54 @@
  * Created Date: Monday, December 17th 2018, 5:27:50 pm
  * Author: yassine.b (yassine.b@caramail.com)
  * 
- * Copyright (c) 2018 - 2018 Yassine Benmessahel
+ * Copyright (c) 2018 - 2019 Yassine Benmessahel
  */
 
 #include "my.h"
 
 int gameloop (sfRenderWindow *window, sfEvent event) 
 {
-    int **board = my_createboard();
+    char strint[100];
+    int **board = createboard();
     t_game element = gameloop_init();
     element.blocks = initialize_game(board);
-    int count = 0;
-    int row = 0;
 
     sfMusic_play(element.music);
-    printf("first %d\n", board[0][0]);
     while (sfRenderWindow_isOpen(window)) {
+        element.time =  sfClock_getElapsedTime(element.clock);
+        element.seconds = element.time.microseconds / 250000.0;
+        if (element.seconds > 2) {
+            element.air = element.air - 1;
+            sprintf(strint, "%d%%", element.air);
+            sfText_setString(element.text[2], strint);
+            sfClock_restart(element.clock);
+        }
+        // Start Display Section
+        sfRenderWindow_drawSprite(window, element.background, NULL);
+        sfRenderWindow_drawSprite(window, element.gamegui, NULL);
+        for (int i = 0; i != 4; i++) {
+            sfRenderWindow_drawText(window, element.text[i], NULL);
+        }
+        sfRenderWindow_drawSprite(window, element.player, NULL);
+        for (int row = 0; row != 8; row++) {
+            for (int col = 0; col != 7; col++)
+                sfRenderWindow_drawSprite(window, element.blocks[row][col], NULL);
+        }
+        sfRenderWindow_display(window);
+        sfRenderWindow_clear(window, sfBlack);
+        // End Display Section
+        
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtClosed) {
                 sfMusic_stop(element.music);
                 sfMusic_destroy(element.music);
                 sfRenderWindow_close(window);
             }
-	    }
-        sfRenderWindow_clear(window, sfBlack);
-        sfRenderWindow_drawSprite(window, element.background, NULL);
-        sfRenderWindow_drawSprite(window, element.gamegui, NULL);
-        sfRenderWindow_drawSprite(window, element.player, NULL);
-        while (row != 8) {
-            while (count != 7) {
-                sfRenderWindow_drawSprite(window, element.blocks[row][count], NULL);
-                count = count + 1;
+            if (event.type == sfEvtKeyPressed) {
+                //player_movement(event);
+
             }
-            count = 0;
-            row = row + 1;
-        }
-        row = 0;
-        sfRenderWindow_display(window);
+	    }
     }
     return (0);
 }
@@ -101,7 +112,7 @@ sfSprite ***initialize_game (int **board)
     return (blocks);
 }
 
-int **my_createboard(void)
+int **createboard(void)
 {
     int **board = malloc(sizeof (int *) * 501);
     int row = 0;
@@ -128,29 +139,4 @@ int **my_createboard(void)
         row = row + 1;
     }
     return (board);
-}
-
-int logo_display (sfRenderWindow *window, sfEvent event) 
-{
-    t_logo element = logo_display_init();
-    float seconds;
-
-    while (sfRenderWindow_isOpen(window)) {
-        element.fade =  sfClock_getElapsedTime(element.clock);
-        seconds = element.fade.microseconds / 250000.0;
-        sfRenderWindow_clear(window, sfBlack);
-        if (seconds > 0.15 && element.color.a < 255) {
-            element.color.a = element.color.a + 5;
-            sfClock_restart(element.clock);
-        }
-        sfSprite_setColor(element.logo, element.color); 	
-        sfRenderWindow_drawSprite(window, element.logo, NULL);
-        sfRenderWindow_display(window);
-        if (element.color.a == 255) {
-            sfClock_destroy(element.clock); 	
-            sfSprite_destroy(element.logo);
-            start_menu(window, event);
-        }
-    }
-    return (0);
 }
