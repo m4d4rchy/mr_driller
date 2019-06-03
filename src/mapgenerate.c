@@ -86,6 +86,7 @@ int **genBlock(void)
         col = 0;
         row = row + 1;
     }
+    genAir();
     return (board);
 }
 
