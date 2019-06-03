@@ -106,7 +106,6 @@ struct s_game gameloop_init(void)
     element.gamegui_position.y = 0;
     element.music = sfMusic_createFromFile("sound/level.ogg");
     sfSprite_setPosition(element.gamegui, element.gamegui_position);
-    element.clock = sfClock_create();
     return (element);
 }
 
