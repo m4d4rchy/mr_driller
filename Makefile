@@ -19,6 +19,8 @@ NAME	= 	mr_driller
 
 SRC 	=	src/main.c\
 			src/game.c\
+			src/scorescreen.c\
+			src/mapgenerate.c\
 			src/main_menu.c\
 			src/splashscreen.c\
 			src/initialization.c

@@ -7,7 +7,7 @@
  * Copyright (c) 2018 - 2019 Yassine Benmessahel
  */
 
-sfSprite ***drawLine (int **boardn int line) 
+sfSprite ***createBlock (int **board) 
 {
     int row = 0;
     int col = 0;
@@ -40,16 +40,14 @@ sfSprite ***drawLine (int **boardn int line)
                 area.top = 150;
                 blocks[row][col] = my_sprite_rec("img/block.png", area);
             }
-            /*else
-                blocks[row][col] = my_sprite_rec("img/block.png", area);*/
-            /*else if (board[row][col] == 4) {
+            else if (board[row][col] == 4) {
                 area.top = 200;
                 blocks[row][col] = my_sprite_rec("img/block.png", area);
             }
             else if (board[row][col] == 5) {
                 area.top = 250;
                 blocks[row][col] = my_sprite_rec("img/block.png", area);
-            }*/                                    
+            }                                    
             sfSprite_setPosition(blocks[row][col], position);
             position.x = position.x + 50;
             col = col + 1;
@@ -95,8 +93,8 @@ int **genAir(int **board)
 {
     int row = 0;
     while (board[row] != NULL) {
-        if ((rand() % 3) == 3) {
-            board[row][rand() % 3] = 5;
+        if ((rand() % 5) == 3) {
+            board[row][rand() % 6] = 5;
         }
         row = row + 1;
     }
@@ -108,7 +106,7 @@ int **genBox(int **board)
     int row = 0;
     while (board[row] != NULL) {
         if ((rand() % 2) == 2) {
-            board[row][rand() % 3] = 4;
+            board[row][rand() % 6] = 4;
         }
         row = row + 1;
     }

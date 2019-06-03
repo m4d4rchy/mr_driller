@@ -28,6 +28,12 @@ int gameloop (sfRenderWindow *, sfEvent);
 int **createboard (void);
 sfSprite ***initialize_game (int **);
 
+/*  mapgenerate.c  */
+sfSprite ***createBlock (int **board);
+int **genBlock(void);
+
+/*  scorescreen.c  */
+
 /*  main.c  */
 sfSprite *my_sprite (const char *);
 sfSprite *my_sprite_rec (const char *, sfIntRect);
