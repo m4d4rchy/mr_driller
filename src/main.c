@@ -2,9 +2,9 @@
  * Filename: main.c
  * Project: mr_driller
  * Created Date: Monday, December 17th 2018, 1:47:44 pm
- * Author: yassine.b (yassine.b@caramail.com)
+ * Author: bytesmallgames (support@bytesmallgames.com)
  * 
- * Copyright (c) 2018 - 2019 Yassine Benmessahel
+ * Copyright (c) 2018 - 2019 Bytesmallgames
  */
 
 #include "my.h"

@@ -31,6 +31,7 @@ sfSprite ***initialize_game (int **);
 int player_movement(t_game *element, sfKeyCode code);
 int drillBlock(const char *direction, t_game *element);
 void moveBoard(t_game *element);
+void collisionCheck(sfRenderWindow *window, sfEvent event, t_game *element);
 
 /*  gameui.c  */
 int print_gameui(t_game *);

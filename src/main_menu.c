@@ -2,9 +2,9 @@
  * Filename: main_menu.c
  * Project: mr_driller
  * Created Date: Thursday, December 20th 2018, 3:53:38 pm
- * Author: yassine.b (yassine.b@caramail.com)
+ * Author: bytesmallgames (support@bytesmallgames.com)
  * 
- * Copyright (c) 2018 - 2019 Yassine Benmessahel
+ * Copyright (c) 2018 - 2019 Bytesmallgames
  */
 
 #include "my.h"
@@ -24,28 +24,20 @@ int main_menu (sfRenderWindow *window, sfEvent event)
         sfRenderWindow_display(window);
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtKeyPressed) {
-                sfMusic_stop(element.music);
-                sfMusic_play(element.sfx);
-                sfMusic_destroy(element.music);
-                sfSprite_destroy(element.background);
-                sfSprite_destroy(element.logo);
-                sfSprite_destroy(element.image);
-                sfText_destroy(element.message);
                 gameloop(window, event);
-                sfMusic_destroy(element.sfx);
             }
             if (event.type == sfEvtClosed) {
-                sfMusic_stop(element.music);
-                sfMusic_destroy(element.music);
-                sfMusic_destroy(element.sfx);
-                sfSprite_destroy(element.background);
-                sfSprite_destroy(element.logo);
-                sfSprite_destroy(element.image);
-                sfText_destroy(element.message);
                 sfRenderWindow_close(window);
             }
 	    }
     }
+    sfMusic_destroy(element.music);
+    sfMusic_destroy(element.sfx);
+    sfSprite_destroy(element.background);
+    sfSprite_destroy(element.logo);
+    sfSprite_destroy(element.image);
+    sfText_destroy(element.message);
+    sfRenderWindow_destroy(window);
     return (0);
 }
 

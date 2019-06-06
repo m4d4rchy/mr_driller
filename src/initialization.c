@@ -2,9 +2,9 @@
  * Filename: initialization.c
  * Project: mr_driller
  * Created Date: Thursday, December 20th 2018, 10:47:47 am
- * Author: yassine.b (yassine.b@caramail.com)
+ * Author: bytesmallgames (support@bytesmallgames.com)
  * 
- * Copyright (c) 2018 - 2019 Yassine Benmessahel
+ * Copyright (c) 2018 - 2019 Bytesmallgames
  */
 
 #include "my.h"

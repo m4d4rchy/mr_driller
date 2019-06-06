@@ -2,9 +2,9 @@
  * Filename: main_menu.c
  * Project: mr_driller
  * Created Date: Saturday, May 25th 2019, 6:01:47 pm
- * Author: yassine.b (yassine.b@caramail.com)
+ * Author: bytesmallgames (support@bytesmallgames.com)
  * 
- * Copyright (c) 2018 - 2019 Yassine Benmessahel
+ * Copyright (c) 2018 - 2019 Bytesmallgames
  */
 
 #include "my.h"

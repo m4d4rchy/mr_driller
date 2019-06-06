@@ -2,9 +2,9 @@
  * Filename: initialization.c
  * Project: mr_driller
  * Created Date: Thursday, December 20th 2018, 10:47:47 am
- * Author: yassine.b (yassine.b@caramail.com)
+ * Author: bytesmallgames (support@bytesmallgames.com)
  * 
- * Copyright (c) 2018 - 2019 Yassine Benmessahel
+ * Copyright (c) 2018 - 2019 Bytesmallgames
  */
 
 #include "my.h"
@@ -78,9 +78,9 @@ int **genBox(int **board)
 
 int **genAir(int **board)
 {
-    int row = 0;
+    int row = 5;
     while (row != 500) {
-        if ((rand() % 5) == 3) {
+        if ((rand() % 6) == 3) {
             board[row][rand() % 6] = 6;
         }
         row = row + 1;
