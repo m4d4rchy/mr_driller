@@ -47,6 +47,7 @@ typedef struct s_game
     sfClock *clock;
     sfTime time;
     sfText  **text;
+    int **board;
     int depth;
     int score;
     int air;

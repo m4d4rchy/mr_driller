@@ -76,8 +76,8 @@ struct s_game gameloop_init(void)
     element.air = 100;
     element.level = 0;
     element.player_block_pos = malloc(sizeof(int) * 2);
-    element.player_block_pos[0] = 3;
-    element.player_block_pos[1] = 0;
+    element.player_block_pos[0] = 0;
+    element.player_block_pos[1] = 3;
     element.text = malloc(sizeof(*element.text) * 4);
     element.text[0] = create_texte("0", "font/ARCADE.otf", 50);
     sfText_setPosition(element.text[0], position);

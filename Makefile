@@ -19,6 +19,7 @@ NAME	= 	mr_driller
 
 SRC 	=	src/main.c\
 			src/game.c\
+			src/gameui.c\
 			src/scorescreen.c\
 			src/mapgenerate.c\
 			src/main_menu.c\

@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "struct.h"
 
 #ifndef MY_H_
@@ -27,9 +28,15 @@ sfText *create_texte(char *str, char *fontpath, int size);
 int gameloop (sfRenderWindow *, sfEvent);
 int **createboard (void);
 sfSprite ***initialize_game (int **);
+int player_movement(t_game *element, sfKeyCode code);
+int drillBlock(const char *direction, t_game *element);
+void moveBoard(t_game *element);
+
+/*  gameui.c  */
+int print_gameui(t_game *);
 
 /*  mapgenerate.c  */
-sfSprite ***createBlock (int **board);
+sfSprite ***createBlock (int **);
 int **genBlock(void);
 
 /*  scorescreen.c  */

@@ -7,6 +7,8 @@
  * Copyright (c) 2018 - 2019 Yassine Benmessahel
  */
 
+#include "my.h"
+
 sfSprite ***createBlock (int **board) 
 {
     int row = 0;
@@ -16,35 +18,35 @@ sfSprite ***createBlock (int **board)
     area.top = 0;
     area.width = 50;
     area.height = 50;
-    sfSprite ***blocks = malloc(sizeof(**blocks) * 7);
+    sfSprite ***blocks = malloc(sizeof(**blocks) * 500);
     sfVector2f position;
     position.x = 0;
     position.y = 200;
 
-    while (row != 8) {
+    while (row != 500) {
         blocks[row] = malloc(sizeof(*blocks) * 7);
         while (col != 7) {
-            if (board[row][col] == 0) {
+            if (board[row][col] == 1) {
                 area.top = 0;
                 blocks[row][col] = my_sprite_rec("img/block.png", area);
             }
-            else if (board[row][col] == 1) {
+            else if (board[row][col] == 2) {
                 area.top = 50;
                 blocks[row][col] = my_sprite_rec("img/block.png", area);
             }
-            else if (board[row][col] == 2) {
+            else if (board[row][col] == 3) {
                 area.top = 100;
                 blocks[row][col] = my_sprite_rec("img/block.png", area);
             }
-            else if (board[row][col] == 3) {
+            else if (board[row][col] == 4) {
                 area.top = 150;
                 blocks[row][col] = my_sprite_rec("img/block.png", area);
             }
-            else if (board[row][col] == 4) {
+            else if (board[row][col] == 5) {
                 area.top = 200;
                 blocks[row][col] = my_sprite_rec("img/block.png", area);
             }
-            else if (board[row][col] == 5) {
+            else if (board[row][col] == 6) {
                 area.top = 250;
                 blocks[row][col] = my_sprite_rec("img/block.png", area);
             }                                    
@@ -60,9 +62,35 @@ sfSprite ***createBlock (int **board)
     return (blocks);
 }
 
+
+int **genBox(int **board)
+{
+    int row = 0;
+    while (row != 500) {
+        if ((rand() % 2) == 1) {
+            board[row][rand() % 6] = 5;
+        }
+        row = row + 1;
+    }
+    printf("row: %d\n", row);
+    return (board);
+}
+
+int **genAir(int **board)
+{
+    int row = 0;
+    while (row != 500) {
+        if ((rand() % 5) == 3) {
+            board[row][rand() % 6] = 6;
+        }
+        row = row + 1;
+    }
+    return (board);
+}
+
 int **genBlock(void)
 {
-    int **board = malloc(sizeof (int *) * 501);
+    int **board = malloc(sizeof (int *) * 500);
     int row = 0;
     int col = 0;
     time_t t;
@@ -77,7 +105,7 @@ int **genBlock(void)
             if (col == 7)
                 board[row][col] = -1;
             else {
-                board[row][col] = (rand() % 4);
+                board[row][col] = (rand() % (4 - 1 + 1)) + 1;
             }
             printf("%d", board[row][col]);
             col = col + 1;
@@ -86,30 +114,7 @@ int **genBlock(void)
         col = 0;
         row = row + 1;
     }
-    genAir();
-    return (board);
-}
-
-int **genAir(int **board)
-{
-    int row = 0;
-    while (board[row] != NULL) {
-        if ((rand() % 5) == 3) {
-            board[row][rand() % 6] = 5;
-        }
-        row = row + 1;
-    }
-    return (board);
-}
-
-int **genBox(int **board)
-{
-    int row = 0;
-    while (board[row] != NULL) {
-        if ((rand() % 2) == 2) {
-            board[row][rand() % 6] = 4;
-        }
-        row = row + 1;
-    }
+    board = genAir(board);
+    board = genBox(board);
     return (board);
 }
