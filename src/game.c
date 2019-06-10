@@ -80,7 +80,7 @@ int player_movement(t_game *element, sfKeyCode code)
             }
         }
         right = 1;
-        if (element->player_block_pos[0] != 0 && element->board[element->player_block_pos[0] - 1][element->player_block_pos[1] + 1] == 0) {
+        if (element->player_block_pos[0] != 0 && (element->board[element->player_block_pos[0] - 1][element->player_block_pos[1] + 1] == 0 || element->board[element->player_block_pos[0] - 1][element->player_block_pos[1] + 1] == 6)) {
             element->player_position.x = element->player_position.x + 50;
             sfSprite_setPosition(element->player, element->player_position);
             element->player_block_pos[1] = element->player_block_pos[1] + 1;
@@ -98,7 +98,7 @@ int player_movement(t_game *element, sfKeyCode code)
             }
         }
         left = 1;
-        if (element->player_block_pos[0] != 0 && element->board[element->player_block_pos[0] - 1][element->player_block_pos[1] - 1] == 0) {
+        if (element->player_block_pos[0] != 0 && (element->board[element->player_block_pos[0] - 1][element->player_block_pos[1] - 1] == 0 || element->board[element->player_block_pos[0] - 1][element->player_block_pos[1] - 1] == 6)) {
             element->player_position.x = element->player_position.x - 50;
             sfSprite_setPosition(element->player, element->player_position);
             element->player_block_pos[1] = element->player_block_pos[1] - 1;
@@ -166,8 +166,6 @@ void moveBoard(t_game *element)
 
 void collisionCheck(sfRenderWindow *window, sfEvent event, t_game *element)
 {
-    (void)window;
-    (void)event;
     if (element->board[element->player_block_pos[0]][element->player_block_pos[1]] == 6) {
         if (element->air + 20 <= 100)
             element->air = element->air + 20;
@@ -177,13 +175,38 @@ void collisionCheck(sfRenderWindow *window, sfEvent event, t_game *element)
         element->player_block_pos[0] = element->player_block_pos[0] + 1;
         element->depth = element->depth + 1;
     }
-    if (element->board[element->player_block_pos[0]][element->player_block_pos[1]] == 6) {
+    if (element->player_block_pos[0] != 0 && element->board[element->player_block_pos[0] - 1][element->player_block_pos[1]] == 6) {
         if (element->air + 20 <= 100)
             element->air = element->air + 20;
-        element->board[element->player_block_pos[0]][element->player_block_pos[1]] = 0;
-        sfSprite_destroy(element->blocks[element->player_block_pos[0]][element->player_block_pos[1]]);
-        moveBoard(element);
-        element->player_block_pos[0] = element->player_block_pos[0] + 1;
-        element->depth = element->depth + 1;
+        element->board[element->player_block_pos[0] - 1][element->player_block_pos[1]] = 0;
+        sfSprite_destroy(element->blocks[element->player_block_pos[0] - 1][element->player_block_pos[1]]);
+    }
+    if (element->air == 0 || element->depth == 498) {
+        sfMusic_stop(element->music);
+        scoreScreen(window, event, element);
+    }
+}
+
+void gravity(sfRenderWindow *window, sfEvent event, t_game *element)
+{
+    (void)event;
+    (void)window;
+    sfVector2f position;
+    int tmp = 0;
+
+    position.y = 50;
+    for (int row = 0; row != 500; row++) {
+            for (int col = 0; col != 7; col++) {
+                if (element->board[row][col] != 0) {
+                    if (row != 499 && element->board[row + 1][col] == 0) {
+                        sfSprite_move(element->blocks[row][col], position);
+                        element->blocks[row + 1][col] = element->blocks[row][col]; 
+                        tmp = element->board[row][col];
+                        element->board[row][col] = 0;
+                        element->board[row + 1][col] = tmp;
+                        printf("%d\n", tmp);
+                    }
+                }
+            }
     }
 }

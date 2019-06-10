@@ -9,33 +9,29 @@
 
 #include "my.h"
 
-int score_screen (sfRenderWindow *window, sfEvent event, t_game *element)
+int scoreScreen (sfRenderWindow *window, sfEvent event, t_game *element)
 {
-    char str[100];
-    sfVector2f position;
-    sfText* score = create_texte("0", "font/ARCADE.otf", 50);
-    sfText* depth;
-    sfText* level;
-
-    sprintf(str, "%d", element->score);
-    score = create_texte(str, "font/ARCADE.otf", 50);
-    sfText_setPosition(score, position);
-    sfText_setColor(score, sfWhite);
-    sprintf(str, "%d", element->depth);
-    depth = create_texte("0", "font/ARCADE.otf", 50);
-    sfText_setPosition(depth, position);
-    sfText_setColor(depth, sfWhite);
-    sprintf(str, "%d", element->level);
-    level = create_texte("0", "font/ARCADE.otf", 50);
-    sfText_setPosition(level, position);
-    sfText_setColor(level, sfWhite);
+    sfSprite_destroy(element->background);
+    element->background = my_sprite("img/menubg.jpg");
+    element->gamegui_position.y = 180;
+    element->gamegui_position.x = 150;
+    sfText_setPosition(element->text[1], element->gamegui_position);
+    sfText_setColor(element->text[1], sfWhite);
+    element->gamegui_position.y = 230;
+    sfText_setPosition(element->text[0], element->gamegui_position);
+    sfText_setColor(element->text[0], sfWhite);
+    element->gamegui_position.y = 280;
+    sfText_setPosition(element->text[3], element->gamegui_position);
+    sfText_setColor(element->text[3], sfWhite);
     while (sfRenderWindow_isOpen(window)) {
-
+        sfRenderWindow_drawSprite(window, element->background, NULL);
+        sfRenderWindow_drawText(window, element->text[1], NULL);
+        sfRenderWindow_drawText(window, element->text[0], NULL);
+        sfRenderWindow_drawText(window, element->text[3], NULL);
         sfRenderWindow_display(window);
         sfRenderWindow_clear(window, sfBlack);
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtKeyPressed) {
-
                 gameloop(window, event);
             }
             if (event.type == sfEvtClosed) {
@@ -43,9 +39,9 @@ int score_screen (sfRenderWindow *window, sfEvent event, t_game *element)
             }
 	    }
     }
-    sfText_destroy(score);
+    /*sfText_destroy(score);
     sfText_destroy(depth);
     sfText_destroy(level);
-    sfRenderWindow_destroy(window);
+    sfRenderWindow_destroy(window);*/
     return (0);
 }

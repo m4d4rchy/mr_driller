@@ -24,6 +24,7 @@ int main_menu (sfRenderWindow *window, sfEvent event)
         sfRenderWindow_display(window);
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtKeyPressed) {
+                sfMusic_stop(element.music);
                 gameloop(window, event);
             }
             if (event.type == sfEvtClosed) {

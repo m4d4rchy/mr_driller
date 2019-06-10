@@ -56,6 +56,13 @@ typedef struct s_game
     int *player_block_pos;
 } t_game;
 
+typedef struct s_scorescreen
+{
+    sfSprite *background;
+    sfText **text;
+    sfVector2f position;
+} t_scorescreen;
+
 typedef struct s_logo
 {
     sfSprite *logo;

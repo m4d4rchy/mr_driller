@@ -32,6 +32,7 @@ int player_movement(t_game *element, sfKeyCode code);
 int drillBlock(const char *direction, t_game *element);
 void moveBoard(t_game *element);
 void collisionCheck(sfRenderWindow *window, sfEvent event, t_game *element);
+void gravity(sfRenderWindow *window, sfEvent event, t_game *element);
 
 /*  gameui.c  */
 int print_gameui(t_game *);
@@ -41,6 +42,7 @@ sfSprite ***createBlock (int **);
 int **genBlock(void);
 
 /*  scorescreen.c  */
+int scoreScreen (sfRenderWindow *window, sfEvent event, t_game *element);
 
 /*  main.c  */
 sfSprite *my_sprite (const char *);
